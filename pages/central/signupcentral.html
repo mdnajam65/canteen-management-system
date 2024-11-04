@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+
+    <style>
+        /* -----------------CSS  RESET----------------- */
+        *
+        {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+
+
+        /* ************* Navbar ************* */
+        .navbar
+        {
+            border: 3px solid #673a04;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgb(0, 0, 0);
+        }
+        .navbar a img
+        {
+            margin-top: 8px;
+            height: 50px;
+            filter: invert(100%);
+        }
+
+
+        /* ----------------- SignUp Window ----------------- */
+
+        .signupContainer
+        {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* border: 2px solid green; */
+        }
+        
+        .fillup
+        {
+            text-align: center;
+            padding: 15px;
+            margin: 10px;
+            width: 600px;
+            border-radius: 15px;
+        }
+        .signupInput
+        {
+            border: 3px solid black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* width: 200px; */
+            background:#dcdcdc;
+            border-radius: 10px;
+        }
+        .submitReset
+        {
+            display: flex;
+            /* border: 2px solid green; */
+            padding: 10px;
+        }
+        .signupInput span
+        {
+            color: red;
+        }
+        .btn
+        {
+            padding: 15px;
+            width: 200px;
+            margin: 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            background:#b3b3b3;
+        }
+
+
+    </style>
+    
+</head>
+<body>
+    </style>
+</head>
+<body>
+
+    <!-- ************* Navbar ************* -->
+    <div class="navbar">
+
+        <a href="/">
+
+            <img src="./images/LOGOjmi.png" alt="JMI" id="logojmi">
+
+        </a>
+        
+        
+
+    </div>
+
+     <!-- ----------------- SignUp Window ----------------- -->
+
+        <form action="" name="signup" onsubmit="return validateForm()" method="post">
+
+                <div class="signupInput">
+                    <div id="name">
+
+                        <input type="text" name="name" class="fillup" required placeholder="Name"><b><span class="formerror"></span></b>
+
+                    </div>
+                    <div id="faculty">
+
+                        <input type="text" name="faculty" class="fillup" required placeholder="Faculty"><b><span class="formerror"></span></b>
+
+                    </div>
+                    <div id="department">
+
+                        <input type="text" name="department" class="fillup" required placeholder="Department"><b><span class="formerror"></span></b>
+
+                    </div>
+                    <div id="studid">
+
+                        <input type="number" name="studid" class="fillup" required placeholder="Student ID"><b><span class="formerror"></span></b>
+
+                    </div>
+                    <div id="number">
+
+                        <input type="number" name="number" class="fillup" required placeholder="Mobile Number"><b><span class="formerror"></span></b>
+
+                    </div>
+                    <div id="email">
+
+                        <input type="email" name="email" class="fillup" required placeholder="Email ID"><b><span class="formerror"></span></b>
+
+                    </div>
+                    <div id="createpass">
+
+                        <input type="password" name="createpass" class="fillup" required placeholder="Create Password"><b><span class="formerror"></span></b>
+
+                    </div>
+                    <div id="confirmpass">
+
+                        <input type="password" name="confirmpass" class="fillup" required placeholder="Confirm Password"><b><span class="formerror"></span></b>
+
+                    </div>
+
+
+                <div class="submitReset">
+
+                    <input type="submit" class="btn" value="SUBMIT">
+                    <input type="reset" class="btn" value="RESET">
+
+                </div>
+
+            </div>
+
+            </form>
+            
+
+    </div>
+    
+
+
+    <script>
+        function clearErrors()
+        {
+            let error=document.getElementsByClassName('formerror')
+            for(let item of error)
+            {
+                item.innerHTML="";
+            }
+
+        }
+
+        function setError(id,error)
+        {
+            let element=document.getElementById(id);
+            element.getElementsByClassName('formerror')[0].innerHTML=error;
+
+        }
+
+        function validateForm()
+        {
+            clearErrors();
+            let returnVal=true;
+
+            let name=document.forms['signup']['name'].value
+            if(name.length > 30)
+            {
+                returnVal=false;
+                setError("name","*Name Should have less than 30 characters!");
+            }
+
+            let createpass=document.forms['signup']['createpass'].value
+            let confirmpass=document.forms['signup']['confirmpass'].value
+
+            if(createpass.length<6)
+            {
+                setError("createpass","*Password should have more than 6 characters")
+            }
+
+            if(createpass.length>15)
+            {
+                returnVal=false;
+                setError("createpass","*Password should have less than 15 characters")
+            }
+            if(createpass.length<5)
+            {
+                returnVal=false;
+                setError("createpass","*Password should have atleast 6 Chars")
+            }
+
+            if(createpass != confirmpass)
+            {
+                returnVal=false;
+                setError("confirmpass","*Confirm Password is not mathcing!");
+                
+            }
+
+            let number=document.forms['signup']['number'].value
+            if(number.length >10)
+            {
+                returnVal=false;
+                setError("number","*Can not exceed 10 characters!");
+                
+            }
+
+            return returnVal
+
+        }
+    </script>
+</body>
+</html>

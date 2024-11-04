@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+    <style>
+
+/* -----------------CSS  RESET----------------- */
+        *
+        {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+
+
+/* -----------------NAVBAR RELATED CODE----------------- */
+        .navbar
+        {
+            border: 2px solid #673a04;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgb(0, 0, 0);
+            position:sticky;
+            top: 0;
+            /* width: fit-content; */
+        }
+        .navbarElements
+        {
+            text-decoration: none;
+            /* border: 1px solid red; */
+            color: white;
+            margin: 3px 45px 3px 45px;
+            padding: 10px;
+            font-weight: bolder;
+            font-size: xx-large;
+
+        }
+        #logojmi
+        {
+            /* border: 1px solid black; */
+            height: 50px;
+            margin-right: 330px;
+            filter: invert(100%);
+        }
+        #logofood
+        {
+            /* border: 1px solid black; */
+            height: 50px;
+            margin-left: 300px;
+            filter: invert(100%);
+        }
+
+        /* -----------------Body Related Code----------------- */
+
+        .body
+        {
+            border: 2px solid red;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 7px;
+            justify-content: space-around;
+        }
+        .canteenContainer
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid black;
+            margin: 5px;
+            flex-direction: column;
+        }
+        .canteenIMG
+        {
+            height: 270px;
+
+        }
+       
+        .link
+        {
+            /* border: 2px solid red; */
+            padding: 1px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            text-decoration: none;
+        }
+        .canteenName
+        {
+            font-size: 29px;
+            color: black;
+        }
+
+        /* -----------------Canteen Request Container----------------- */
+        .requestContainer
+        {
+            margin-top: 10px;
+            border: 2px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url("images/home.png");
+            background-size: cover;
+            /* background-attachment: fixed; */
+            
+        }
+        .para
+        {
+            /* border: 2px solid red; */
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+        .requestContainer .para p
+        {
+            display: flex;
+            justify-content:center;
+            align-items: center;
+            font-size: 40px;
+        }
+        .submitReset
+        {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            
+        }
+        .fillup
+        {
+            text-align:center;
+            padding: 15px;
+            margin: 10px;
+            width: 600px;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+        .btn
+        {
+            padding: 10px;
+            width: 200px;
+            margin: 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            background:#b3b3b3;
+            font-size: 25px;
+            font-weight: bolder;
+        }
+
+       
+        /* -----------------Clock Related Code----------------- */
+        .containerClock
+        {
+            display: flex;
+            align-items: center;
+            background: #000;
+        }
+        .containerClock div
+        {
+            font-size: 30px;
+            color: #f5c68f;
+        }
+
+        #clockIMG
+        {
+            height: 80px;
+            filter: invert(100%);
+            margin-right: 290px;
+            margin-left: 5px;
+        }
+
+
+        /* -----------------Hovering----------------- */
+        .navbar a:hover
+        {
+            color: #f5c68f;
+        }
+        .canteenContainer p:hover
+        {
+            text-decoration: underline;
+        }
+
+
+    </style>
+</head>
+<body onload="visitorCount()">
+    <!-- -----------------NAVBAR RELATED CODE----------------- -->
+    
+    <div class="navbar">
+
+        <img src="./images/LOGOjmi.png" alt="JMI" id="logojmi">
+        
+        <a href="/about" class="navbarElements">About</a >
+        <a target="_blank" href="https://www.jmi.ac.in/" class="navbarElements">University</a>
+        <a href="developers" class="navbarElements">Developers</a>
+
+        <!-- <p class="hits navbrElements"></p> -->
+            
+        <img src="./images/LOGOfood.png" alt="JMI" id="logofood">
+
+    </div>
+
+    <!-- -----------------Body Related Code----------------- --> 
+    <div class="body">
+        
+        <div class="canteenContainer">
+
+            <img id="fet" class="canteenIMG" src="./images/fet.jpg" alt="FET">
+             <a onmouseenter="blurFet()" onmouseleave="resetFet()" class="link" href="/loginfet">
+                <p class="canteenName">FET Canteen</p>
+            </a>
+
+        </div>
+
+        <div class="canteenContainer">
+            
+            <img id="central" class="canteenIMG" src="./images/central.jpg" alt="Central">
+            <a onmouseenter="blurCentral()" onmouseleave="resetCentral()" class="link" href="/logincentral">
+                <p class="canteenName">Central Canteen</p>
+            </a>
+
+        </div>
+
+        <div class="canteenContainer">
+            
+            <img id="castro" class="canteenIMG" src="./images/castro.jpg" alt="Castro">
+            <a onmouseenter="blurCastro()" onmouseleave="resetCastro()" class="link" href="/logincastro">
+                <p class="canteenName">Castro Canteen</p>
+            </a>
+
+        </div>
+ 
+    </div>
+    
+    <!-- -----------------Canteen Request Code----------------- -->
+    <div class="requestContainer">
+
+        <div class="para">
+            <p>Want to open up a Canteen at JMI?</p>
+            <p>Give us a Request</p>
+        </div>
+
+        <form action="" name="form1" method="post">
+            <div class="name">
+
+                <input type="text" class="fillup" name="name" required placeholder="Name of Requester/Organization" id="">
+
+            </div>
+            <div class="number">
+
+                <input type="number" class="fillup" name="number" required placeholder="Mobile Number" id="">
+
+            </div>
+
+            <div class="email">
+
+                <input type="email" class="fillup" name="email" required placeholder="Email Address" id="">
+                
+            </div>
+
+            <div class="campus">
+
+                <input type="text" class="fillup" name="campus" required placeholder="North Campus/South Campus" id="">
+                
+            </div>
+
+            <div class="partners">
+                
+                <input type="number" class="fillup" name="partners" required placeholder="Number Of Partners" id="">
+
+            </div>
+            <div class="date">
+                
+                <input type="date" class="fillup" name="date" required placeholder="Expected " id="">
+
+            </div>
+            <div class="reference">
+                
+                <input type="text" class="fillup" name="reference" required placeholder="Reference ('none' otherwise)" id="">
+
+            </div>
+            <div class="submitReset">
+
+                <input type="submit" class="btn" value="Submit">
+                <input type="reset" class="btn" value="Reset">
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- -----------------Clock Related Code----------------- -->
+    <div class="containerClock">
+        <img src="./images/clock.jpg" id="clockIMG" alt="">
+
+        <div id="clock">Clock Appearing..</div>
+
+        <div id="count">
+            
+        </div>
+        
+    </div>
+    
+    
+    
+    <!-- -----------------Footer Related Code----------------- -->
+
+    <script>
+        
+        setInterval(() =>{
+            
+            document.getElementById("clock").innerHTML=Date();
+            
+        },1000);
+
+        function visitorCount()
+        {
+
+            fetch("https://api.countapi.xyz/update/canteenJMI.com/counter?amount=1")
+            .then((res)=>res.json())
+            .then((res) =>{
+
+                document.getElementById("count").innerHTML=`Visitors: ${res.value}`;
+                
+            })
+            
+        }
+           
+        function blurFet()
+        {
+            document.getElementById("fet").style.opacity=0.7;
+        }
+        function resetFet()
+        {
+            document.getElementById("fet").style.opacity=1;
+        }
+           
+        function blurCentral()
+        {
+            document.getElementById("central").style.opacity=0.7;
+        }
+        function resetCentral()
+        {
+            document.getElementById("central").style.opacity=1;
+        }
+           
+        function blurCastro()
+        {
+            document.getElementById("castro").style.opacity=0.7;
+        }
+        function resetCastro()
+        {
+            document.getElementById("castro").style.opacity=1;
+        }
+            
+
+    </script>
+
+
+
+    
+</body>
+</html>

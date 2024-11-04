@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap" rel="stylesheet">
+
+    <style>
+        /* -----------------CSS  RESET----------------- */
+
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        /* ************* Navbar ************* */
+        .navbar
+        {
+            position:sticky;
+            top: 0px;
+            border: 3px solid #673a04;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: rgb(0, 0, 0);
+        }
+        .navbar a img
+        {
+            margin-top: 8px;
+            height: 50px;
+            filter: invert(100%);
+        }
+        .navbar a
+        {
+            text-decoration: none;
+            color: #f5c68f;
+            font-size: 20px;
+        }
+        .navbar button
+        {
+            cursor: pointer;
+        }
+
+        .container
+        {
+            border: 10px solid rgb(19, 120, 160);
+            display: flex;
+            justify-content: space-between;
+        }
+        /* .imgDiv
+        {
+
+            border: 2px solid blue;
+        } */
+        .container .imgDiv img
+        {
+            height: 255px;
+        }
+        /* **************About Container************** */
+
+        .about h1
+        {
+            font-size: 55px;
+            text-align: center;
+            border-bottom: 10px dotted skyblue;
+        }
+        .about p
+        {
+            font-size: 27px;
+        }
+
+
+        /* **************Other Container************** */
+        .other
+        {
+            text-align: center;
+            /* border: 2px solid green; */
+            width: 1000px;
+            border-left: 8px solid #de0000;
+            border-top-left-radius: 40px;
+            border-bottom-left-radius: 40px;
+        }
+        .count
+        {
+            text-align: center;
+            margin: 20px 25px 10px 25px;
+            border: 5px outset skyblue;
+            font-size: 30px;
+        }
+        
+        .other button
+        {
+            padding: 15px 30px 15px 30px;
+            font-size: 17px;
+            cursor:pointer;
+            /* border-radius: 10px; */
+        }
+        .other .btn
+        {
+            margin: 30px 7px 2px 7px;
+
+        }
+        /* ***************************Pop Up*************************** */
+        .cut
+        {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            /* border: 1px solid red; */
+        }
+        .cut img
+        {
+            height: 15px;
+
+        }
+        .cut button
+        {
+            cursor: pointer;
+        }
+        .popup
+        {
+            width: 500px;
+            height: 470px;
+            border: 5px solid black;
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%,-50%) scale(0.1);
+            visibility: hidden;
+            background: #f3f3f3;
+        }
+        .open-popup
+        {
+            top: 50%;
+            transform: translate(-50%,-50%) scale(1);
+            visibility: visible;
+            transition: transform 0.5s,top 0.5s;
+
+        }
+        .popup h1
+        {
+            font-size: 50px;
+            text-align: center;
+            margin-top: -10px;
+        }
+        .popup h2
+        {
+            font-size: 30px;
+            text-align: center;
+            border-bottom: 3px solid red;
+            padding-bottom: 3px;
+        }
+        .id
+        {
+            display: flex;
+            margin-top: 20px;
+            margin-left: 40px;
+
+        }
+        .id p
+        {
+            font-size: 30px;
+            margin-left: 20px;
+        }
+        .token
+        {
+            display: flex;
+            margin-top: 50px;
+            margin-left: 40px;
+
+        }
+        .token p
+        {
+            font-size: 30px;
+            margin-left: 20px;
+        }
+        .total
+        {
+            display: flex;
+            margin-top: 50px;
+            margin-left: 40px;
+            border-bottom: 3px solid black;
+
+        }
+        .total p
+        {
+            font-size: 30px;
+            margin-left: 20px;
+        }
+        .bottom
+        {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .bottom button
+        {
+            margin-top: 10px;
+            font-size: 25px;
+            padding: 4px;
+            border-radius: 10px;
+        }
+        .bottom a
+        {
+            text-decoration: none;
+            color: black;
+        }
+        .bottom p
+        {
+            color: red;
+            font-size: 18px;
+        }
+        
+    </style>
+</head>
+<body onload="generateToken()">
+    
+    <div class="navbar">
+
+            <button onclick="showPopup()">
+                <h1>Confirm</h1>
+            </button>
+
+            <button>
+                <h1 onclick="reset()">Reset</h1>
+            </button>
+
+            <a href="/">
+                <h1>Logout</h1>
+            </a>
+
+
+        
+        
+
+    </div>
+
+     <!-- _________________________Pop Up_________________________ -->
+        
+     <div class="popup" id="popup">
+        <div class="cut">
+            <button onclick="hidePopup()">
+                <img src="./images/cut.png" alt="cut">
+            </button>
+        </div>
+        <div id="dataToPrint">
+
+            <h1>Castro Canteen</h1>
+            <h2>Order Summary</h2>
+
+
+            <div class="id">
+    
+                <p>Student ID: </p>
+                <p id="studid">0</p>
+    
+            </div>
+    
+            <div class="token">
+    
+                <p>Token Number: </p>
+                <p id="token">0</p>
+    
+            </div>
+    
+            <div class="total">
+    
+                <p>Total Amount: </p>
+                <p id="totalPrice">0</p>
+    
+            </div>
+
+        </div>
+
+
+        <div class="bottom">
+            <button onclick="showPlace(), myprint()" id="print" type="submit" >Print Receipt</button>    
+            <button onclick="endSession()" id="place">Place Order</button>
+            <p>**Kindly print the receipt before placing the order</p>
+        </div>
+
+
+    </div>
+
+
+    <!-- _________________________noodles_________________________ -->
+    <div class="container">
+        
+        <!-- **************Image**************  -->
+        <div class="imgDiv">
+            <img src="./images/noodles.jpg" alt="noodles">
+        </div>
+
+
+        <!-- **************About**************  -->
+        <div class="about">
+            <h1>Noodles</h1>
+            <div class="para">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur consectetur temporibus sed blanditiis, incidunt quasi sit expedita corrupti nam omnis ducimus itaque voluptas, repellat et facere inventore ex tenetur est?</p>
+            </div>
+        </div>
+
+        <!-- **************Other**************  -->
+        <div class="other">
+
+            <div class="btn">
+
+                <button onclick="incrementNoodles()">Add</button>
+                <button onclick="decrementNoodles()">Remove</button>
+
+            </div>
+
+            <div class="count" id="noodles">
+                0
+            </div>
+            
+            <div class="count" id="noodlesPrice">
+                0
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- _________________________biryani_________________________ -->
+    <div class="container">
+        
+        <!-- **************Image**************  -->
+        <div class="imgDiv">
+            <img src="./images/biryani.jpg" alt="biryani">
+        </div>
+
+
+        <!-- **************About**************  -->
+        <div class="about">
+            <h1>Biryani</h1>
+            <div class="para">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur consectetur temporibus sed blanditiis, incidunt quasi sit expedita corrupti nam omnis ducimus itaque voluptas, repellat et facere inventore ex tenetur est?</p>
+            </div>
+        </div>
+        <!-- **************Other**************  -->
+        
+        <div class="other">
+
+            <div class="btn">
+
+                <button onclick="incrementBiryani()">Add</button>
+                <button onclick="decrementBiryani()">Remove</button>
+
+            </div>
+
+            <div class="count" id="biryani">
+                0
+            </div>
+
+            <div class="count" id="biryaniPrice">
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- _________________________Chhole Bhature_________________________ -->
+    <div class="container">
+        
+        <!-- **************Image**************  -->
+        <div class="imgDiv">
+            <img src="./images/chhole.jpg" alt="biryani">
+        </div>
+
+
+        <!-- **************About**************  -->
+        <div class="about">
+            <h1>Chhole Bhature</h1>
+            <div class="para">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur consectetur temporibus sed blanditiis, incidunt quasi sit expedita corrupti nam omnis ducimus itaque voluptas, repellat et facere inventore ex tenetur est?</p>
+            </div>
+        </div>
+        <!-- **************Other**************  -->
+        
+        <div class="other">
+
+            <div class="btn">
+
+                <button onclick="incrementChhole()">Add</button>
+                <button onclick="decrementChhole()">Remove</button>
+
+            </div>
+
+            <div class="count" id="chhole">
+                0
+            </div>
+
+            <div class="count" id="chholePrice">
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- _________________________shawarma_________________________ -->
+    <div class="container">
+        
+        <!-- **************Image**************  -->
+        <div class="imgDiv">
+            <img src="./images/shawarma.jpg" alt="biryani">
+        </div>
+
+
+        <!-- **************About**************  -->
+        <div class="about">
+            <h1>Shawarma</h1>
+            <div class="para">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur consectetur temporibus sed blanditiis, incidunt quasi sit expedita corrupti nam omnis ducimus itaque voluptas, repellat et facere inventore ex tenetur est?</p>
+            </div>
+        </div>
+        <!-- **************Other**************  -->
+        
+        <div class="other">
+
+            <div class="btn">
+
+                <button onclick="incrementShawarma()">Add</button>
+                <button onclick="decrementShawarma()">Remove</button>
+
+            </div>
+
+            <div class="count" id="shawarma">
+                0
+            </div>
+
+            <div class="count" id="shawarmaPrice">
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+    <script>
+        
+        // ****************Noodles*****************
+        let noodlesCount = 0;
+        let noodlesCost = 0;
+        let total=0;
+        let noodles=document.getElementById("noodles");
+        let totalPrice=document.getElementById("totalPrice");
+        let noodlesPrice=document.getElementById("noodlesPrice");
+        function incrementNoodles()
+        {
+            noodlesCount++;
+            noodlesCost=noodlesCost+60;
+            total=total+60;
+            noodles.innerHTML=`${noodlesCount}`;
+            noodlesPrice.innerHTML=`${noodlesCost}`;
+            totalPrice.innerHTML=`&#8377; ${total}`;
+        }
+        function decrementNoodles()
+        {
+            if(noodlesCount != 0 && noodlesCost !=0)
+            {
+                noodlesCount--;
+                noodlesCost = noodlesCost - 60;
+                total=total-60;
+            }
+            noodles.innerHTML=`${noodlesCount}`;
+            noodlesPrice.innerHTML=`${noodlesCost}`;
+            totalPrice.innerHTML=`&#8377; ${total}`;
+        }
+
+        
+        // ****************biryani*****************
+        let biryaniCount = 0;
+        let biryaniCost = 0;
+        let biryani=document.getElementById("biryani");
+        let biryaniPrice=document.getElementById("biryaniPrice");
+        function incrementBiryani()
+        {
+            biryaniCount++;
+            biryaniCost = biryaniCost + 35;
+            total=total+35;
+            biryani.innerHTML=`${biryaniCount}`;
+            biryaniPrice.innerHTML=`${biryaniCost}`;
+            totalPrice.innerHTML=`&#8377; ${total}`;
+        }
+        function decrementBiryani()
+        {
+            if(biryaniCount != 0 && biryaniCost != 0)
+            {
+                biryaniCount--;
+                biryaniCost = biryaniCost - 35;
+                total=total-35;
+            }
+            biryani.innerHTML=`${biryaniCount}`;
+            biryaniPrice.innerHTML=`${biryaniCost}`;
+            totalPrice.innerHTML=`&#8377; ${total}`;
+        }
+
+
+        // ****************chhole*****************
+        let chholeCount = 0;
+        let chholeCost = 0;
+        let chhole=document.getElementById("chhole");
+        let chholePrice=document.getElementById("chholePrice");
+        function incrementChhole()
+        {
+            chholeCount++;
+            chholeCost = chholeCost + 50;
+            total=total+50;
+            chhole.innerHTML=`${chholeCount}`;
+            chholePrice.innerHTML=`${chholeCost}`;
+            totalPrice.innerHTML=`&#8377; ${total}`;
+        }
+        function decrementChhole()
+        {
+            if(chholeCount != 0)
+            {
+                chholeCount--;
+                chholeCost = chholeCost - 50
+                total=total-50;
+            }
+            chhole.innerHTML=`${chholeCount}`;
+            chholePrice.innerHTML=`${chholeCost}`;
+            totalPrice.innerHTML=`&#8377; ${total}`;
+        }
+
+
+        // ****************Shawarma*****************
+        let shawarmaCount = 0;
+        let shawarmaCost = 0;
+        let shawarma=document.getElementById("shawarma");
+        let shawarmaPrice=document.getElementById("shawarmaPrice");
+        function incrementShawarma()
+        {
+            shawarmaCount++;
+            shawarmaCost = shawarmaCost + 80;
+            total=total+80;
+            shawarma.innerHTML=`${shawarmaCount}`;
+            shawarmaPrice.innerHTML=`${shawarmaCost}`;
+            totalPrice.innerHTML=`&#8377; ${total}`;
+        }
+        function decrementShawarma()
+        {
+            if(shawarmaCount != 0)
+            {
+                shawarmaCount--;
+                shawarmaCost = shawarmaCost - 80;
+                total=total-80;
+            }
+            shawarma.innerHTML=`${shawarmaCount}`;
+            shawarmaPrice.innerHTML=`${shawarmaCost}`;
+            totalPrice.innerHTML=`&#8377; ${total}`;
+        }
+
+        // ___________________Display Student ID___________________
+        popup=document.getElementById("popup");
+        let studid=sessionStorage.getItem("id");
+        document.getElementById("studid").innerHTML=`${studid}`;
+
+        // ___________________Display Token Number___________________
+        function generateToken()
+        {
+            let n=10000 + (100000-10000)*Math.random();
+            n=Math.ceil(n);
+            document.getElementById("token").innerHTML=`${n}`;
+        }
+
+        // ___________________Display PopUP___________________
+        function showPopup()
+        {
+            if(total==0)
+            {
+                document.getElementById("print").setAttribute("disabled","disabled");
+                document.getElementById("place").setAttribute("disabled","disabled");
+                popup.classList.add("open-popup");
+                
+                
+            }
+            else
+            {
+                document.getElementById("print").removeAttribute("disabled");
+                document.getElementById("place").setAttribute("disabled","disabled");
+
+                document.getElementById("print").style.cursor="pointer";
+                
+                popup.classList.add("open-popup");
+            }
+        }
+        
+        function hidePopup()
+        {
+            popup.classList.remove("open-popup");
+            document.getElementById("print").style.cursor="default";
+            document.getElementById("place").style.cursor="default";
+        }
+
+        function showPlace()
+        {
+            document.getElementById("place").removeAttribute("disabled");
+            document.getElementById("place").style.cursor="pointer";
+        }
+
+        // ___________________Print the Receipt___________________
+        function myprint()
+        {
+            let receipt=document.getElementById("dataToPrint");
+            newwin=window.open("");
+            newwin.document.write(receipt.outerHTML);
+            newwin.print();
+            newwin.close();
+        }
+
+        // ___________________Reset the Choices___________________
+        function reset()
+        {
+            total=0;
+            noodlesCount=0;
+            noodlesCost=0;
+            biryaniCount=0;
+            biryaniCost=0;
+            chholeCount=0;
+            chholeCost=0;
+            shawarmaCount=0;
+            shawarmaCost=0;
+            noodles.innerHTML=`${noodlesCount}`;
+            noodlesPrice.innerHTML=`${noodlesCost}`;
+            biryani.innerHTML=`${biryaniCount}`;
+            biryaniPrice.innerHTML=`${biryaniCost}`;
+            chhole.innerHTML=`${chholeCount}`;
+            chholePrice.innerHTML=`${chholeCost}`;
+            shawarma.innerHTML=`${shawarmaCount}`;
+            shawarmaPrice.innerHTML=`${shawarmaCost}`;
+            totalPrice.innerHTML=`${total}`;
+            document.getElementById("print").setAttribute("disabled","disabled");
+            document.getElementById("place").setAttribute("disabled","disabled");
+            document.getElementById("print").style.cursor="default";
+            document.getElementById("place").style.cursor="default";
+        }
+
+        // ___________________Reset the Choices___________________
+        function endSession()
+        {
+            alert(`Your order has been Succesfully placed\n --> ₹ ${total} Deducted from user Account to Castro Canteen `);
+            generateToken();
+            reset();
+        }
+
+
+
+    </script>
+
+</body>
+</html>
